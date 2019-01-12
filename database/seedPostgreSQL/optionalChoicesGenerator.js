@@ -14,9 +14,8 @@ const params = {
 };
 
 ////////////////////////////////////////////////////////
-// GENERATES 150 MILLION
-//   After 2 choices created for each required category
-//     reqCategoryIds are randomized from 1 to 33 million
+// GENERATES 100 MILLION
+//   optional choices randomly dispersed amongst menu items
 ////////////////////////////////////////////////////////
 const optionalChoicesPrinter = () => {
   const fil = fs.createWriteStream('optionalChoices.csv');
