@@ -21,23 +21,62 @@ const generateName = () => faker.random.words();
 const generateMenuItemCategoriesArray = numCategories => (
   randomArray(numCategories, () => generateName())
 );
-const generateChoice = range => ({
+// const generateChoice = range => ({
+//   name: generateName(),
+//   price: randomFloat(range),
+// });
+const generateChoice = (choiceId, range, categoryId) => ({
+  choiceId,
   name: generateName(),
   price: randomFloat(range),
+  categoryId
 });
+
+const generateOptionalChoice = (choiceId, range, itemId) => ({
+  choiceId,
+  name: generateName(),
+  price: randomFloat(range),
+  itemId
+});
+
 const generateChoicesArray = (numChoices, prices) => (
   randomArray(numChoices, () => generateChoice(prices))
 );
-const generateRequiredChoiceCategories = (numCategories, numChoices, prices) => (
-  randomArray(numCategories, () => ({
-    name: generateName(),
-    choices: generateChoicesArray(numChoices, prices),
-  }))
-);
 
-const generateMenuItem = (restaurantId, itemId, category, params) => ({
-  restaurantId,
+// const generateRequiredChoiceCategories = (numCategories, numChoices, prices) => (
+//   randomArray(numCategories, () => ({
+//     name: generateName(),
+//     choices: generateChoicesArray(numChoices, prices),
+//   }))
+// );
+
+const generateRequiredChoiceCategories = (categoryId, itemId) => ({
+    categoryId,
+    categoryName: generateName(),
+    itemId
+});
+
+// const generateMenuItem = (restaurantId, itemId, category, params) => ({
+//   restaurantId,
+//   itemId,
+//   category,
+//   name: generateName(),
+//   price: randomFloat(params.priceRange),
+//   description: faker.lorem.paragraph(),
+//   pictureUrl: pictures[faker.random.number(pictures.length - 1)],
+//   popular: Math.random() < params.popularFraction,
+//   spicy: Math.random() < params.spicyFraction,
+//   requiredChoiceCategories: generateRequiredChoiceCategories(
+//     params.numRequiredChoiceCategories,
+//     params.numRequiredChoices,
+//     params.priceRange,
+//   ),
+//   optionalChoices: generateChoicesArray(params.numOptionalChoices, params.priceRange),
+// });
+
+const generateMenuItem = (itemId, restaurantId, category, params) => ({
   itemId,
+  restaurantId,
   category,
   name: generateName(),
   price: randomFloat(params.priceRange),
@@ -45,13 +84,8 @@ const generateMenuItem = (restaurantId, itemId, category, params) => ({
   pictureUrl: pictures[faker.random.number(pictures.length - 1)],
   popular: Math.random() < params.popularFraction,
   spicy: Math.random() < params.spicyFraction,
-  requiredChoiceCategories: generateRequiredChoiceCategories(
-    params.numRequiredChoiceCategories,
-    params.numRequiredChoices,
-    params.priceRange,
-  ),
-  optionalChoices: generateChoicesArray(params.numOptionalChoices, params.priceRange),
 });
+
 
 const generateData = (params) => {
   const data = [];
@@ -67,4 +101,14 @@ const generateData = (params) => {
   return data;
 };
 
-module.exports = generateData;
+module.exports = {
+  generateMenuItem,
+  generateMenuItemCategoriesArray,
+  generateRequiredChoiceCategories,
+  generateChoice,
+  generateOptionalChoice,
+  randomArray,
+  randomIndex
+};
+
+// module.exports = generateData;

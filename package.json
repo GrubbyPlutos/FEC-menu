@@ -20,6 +20,7 @@
     "axios": "^0.18.0",
     "bluebird": "^3.5.3",
     "body-parser": "^1.18.3",
+    "csv-write-stream": "^2.0.0",
     "express": "^4.16.4",
     "faker": "^4.1.0",
     "mongoose": "^5.4.0",
