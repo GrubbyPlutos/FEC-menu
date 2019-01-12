@@ -21,10 +21,24 @@ const generateName = () => faker.random.words();
 const generateMenuItemCategoriesArray = numCategories => (
   randomArray(numCategories, () => generateName())
 );
-const generateChoice = range => ({
+// const generateChoice = range => ({
+//   name: generateName(),
+//   price: randomFloat(range),
+// });
+const generateChoice = (choiceId, range, categoryId) => ({
+  choiceId,
   name: generateName(),
   price: randomFloat(range),
+  categoryId
 });
+
+const generateOptionalChoice = (choiceId, range, itemId) => ({
+  choiceId,
+  name: generateName(),
+  price: randomFloat(range),
+  itemId
+});
+
 const generateChoicesArray = (numChoices, prices) => (
   randomArray(numChoices, () => generateChoice(prices))
 );
@@ -36,14 +50,11 @@ const generateChoicesArray = (numChoices, prices) => (
 //   }))
 // );
 
-const generateRequiredChoiceCategories = (categoryId, numCategories, restaurantId, itemId) => (
-  randomArray(numCategories, () => ({
+const generateRequiredChoiceCategories = (categoryId, itemId) => ({
     categoryId,
     categoryName: generateName(),
-    restaurantId,
-    itemId,
-  }))
-);
+    itemId
+});
 
 // const generateMenuItem = (restaurantId, itemId, category, params) => ({
 //   restaurantId,
@@ -94,6 +105,8 @@ module.exports = {
   generateMenuItem,
   generateMenuItemCategoriesArray,
   generateRequiredChoiceCategories,
+  generateChoice,
+  generateOptionalChoice,
   randomArray,
   randomIndex
 };
