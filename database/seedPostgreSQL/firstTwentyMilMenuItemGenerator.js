@@ -18,11 +18,11 @@ const params = {
 
 // writer.pipe(fs.createWriteStream('menuItems.csv'))
 
-const twoMilMenuItemsPrinter = () => {
-  const fil = fs.createWriteStream('firstTwoMilMenuItems.csv');
+const twentyMilMenuItemsPrinter = () => {
+  const fil = fs.createWriteStream('firstTwentyMilMenuItems.csv');
   let itemId = 1;
   let restaurantId = 1;
-  const maxLimit = 10;
+  const maxLimit = 1;
 
   const writer = () => {
     let result = true;
@@ -51,9 +51,13 @@ const twoMilMenuItemsPrinter = () => {
       if (itemId % 10000 === 0) {
         console.log(itemId);
       }
-
+      
       itemId++;
       restaurantId++;
+      
+      if (restaurantId > 10000000) {
+        restaurantId = 1;
+      }
     }
 
     if (itemId < maxLimit) {
@@ -64,5 +68,5 @@ const twoMilMenuItemsPrinter = () => {
   return writer;
 }
 
-const generateTwoMilMenuItems = twoMilMenuItemsPrinter();
-generateTwoMilMenuItems();
+const generateTwentyMilMenuItems = twentyMilMenuItemsPrinter();
+generateTwentyMilMenuItems();
