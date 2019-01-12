@@ -18,17 +18,18 @@ const params = {
 
 // writer.pipe(fs.createWriteStream('menuItems.csv'))
 
-const twentyMilMenuItemsPrinter = () => {
-  const fil = fs.createWriteStream('firstTwentyMilMenuItems.csv');
+const menuItemsPrinter = () => {
+  const fil = fs.createWriteStream('menuItems.csv');
   let itemId = 1;
   let restaurantId = 1;
-  const maxLimit = 1;
+  const maxLimit = 100000000;
 
   const writer = () => {
     let result = true;
 
     while (itemId <= maxLimit && result) {
       const itemCategories = dataFuncs.generateMenuItemCategoriesArray(params.numItemCategories);
+      let data;
       // const data = dataFuncs.randomArray(params.numMenuItems, (_, i) => {
       //   return dataFuncs.generateMenuItem(
       //     itemId, i, itemCategories[dataFuncs.randomIndex(itemCategories.length)], params
@@ -38,14 +39,20 @@ const twentyMilMenuItemsPrinter = () => {
         fil.write('itemId,restaurantId,category,name,price,description,pictureUrl,popular,spicy\n')
       } 
 
-      const data = dataFuncs.generateMenuItem(
+      if (itemId > 30000000) {
+        data = dataFuncs.generateMenuItem(
+          itemId, (Math.floor(Math.random() * (10000000 - 1) + 1)), itemCategories[dataFuncs.randomIndex(itemCategories.length)], params
+        );
+      } else {
+        data = dataFuncs.generateMenuItem(
           itemId, restaurantId, itemCategories[dataFuncs.randomIndex(itemCategories.length)], params
         );
+      }
 
       // for (let x = 0; x < data.length; x++) {
       //   let obj = data[x];
-        let stringToWrite = `${data.itemId},${data.restaurantId},${data.category},${data.name},${data.price},${data.description},${data.pictureUrl},${data.popular},${data.spicy}\n`;
-        result = fil.write(stringToWrite);
+      let stringToWrite = `${data.itemId},${data.restaurantId},${data.category},${data.name},${data.price},${data.description},${data.pictureUrl},${data.popular},${data.spicy}\n`;
+      result = fil.write(stringToWrite);
       // }
       
       if (itemId % 10000 === 0) {
@@ -68,5 +75,5 @@ const twentyMilMenuItemsPrinter = () => {
   return writer;
 }
 
-const generateTwentyMilMenuItems = twentyMilMenuItemsPrinter();
-generateTwentyMilMenuItems();
+const generateMenuItems = menuItemsPrinter();
+generateMenuItems();

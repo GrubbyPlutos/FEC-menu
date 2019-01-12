@@ -13,35 +13,36 @@ const params = {
   spicyFraction: 0.2,
 };
 
+////////////////////////////////////////////////////////
+// GENERATES 33 MILLION
+//   menu itemIds are randomized from 1 to 100 million
+////////////////////////////////////////////////////////
 const requiredCategoriesPrinter = () => {
   const fil = fs.createWriteStream('requiredCategories.csv');
-  let count = 1;
-  const maxLimit = 100000;
+  let categoryId = 1;
+  const maxLimit = 33000000;
 
   const writer = () => {
     let result = true;
 
-    while (count <= maxLimit && result) {
-      const data = dataFuncs.generateRequiredChoiceCategories(count, params.numRequiredChoiceCategories);
-
-      if (count === 1) {
-        fil.write('choiceId,requiredCategory,restaurantId,itemId\n')
+    while (categoryId <= maxLimit && result) {
+      if (categoryId === 1) {
+        fil.write('categoryId,categoryName,itemId\n')
       } 
-
-      for (let x = 0; x < data.length; x++) {
-        let obj = data[x];
-        let stringToWrite = `\n`;
-        // result = fil.write(stringToWrite);
-      }
       
-      if (count % 10000 === 0) {
-        console.log(count);
+      const data = dataFuncs.generateRequiredChoiceCategories(categoryId, (Math.floor(Math.random() * (100000000 - 1) + 1)));
+      
+      let stringToWrite = `${data.categoryId},${data.categoryName},${data.itemId}\n`;
+      result = fil.write(stringToWrite);
+      
+      if (categoryId % 10000 === 0) {
+        console.log(categoryId);
       }
 
-      count++;
+      categoryId++;
     }
 
-    if (count < maxLimit) {
+    if (categoryId < maxLimit) {
       fil.once('drain', writer);
     }
   }
