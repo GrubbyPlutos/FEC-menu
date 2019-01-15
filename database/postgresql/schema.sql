@@ -8,9 +8,9 @@ DROP TABLE menu_items;
 CREATE TABLE menu_items (
   itemId INTEGER NOT NULL PRIMARY KEY,
   restaurantId INTEGER NOT NULL,
-  category VARCHAR(50) NOT NULL,
-  name VARCHAR(50) NOT NULL,
-  price NUMERIC INTEGER NOT NULL,
+  category VARCHAR(150) NOT NULL,
+  name VARCHAR(150) NOT NULL,
+  price NUMERIC NOT NULL,
   description TEXT,
   pictureUrl TEXT,
   popular BOOLEAN NOT NULL,
@@ -34,8 +34,8 @@ DROP TABLE required_choices;
 -- Create table for required_choices
 CREATE TABLE required_choices (
   choiceId INTEGER NOT NULL PRIMARY KEY,
-  name VARCHAR(50) NOT NULL,
-  price NUMERIC INTEGER NOT NULL,
+  name VARCHAR(150) NOT NULL,
+  price NUMERIC NOT NULL,
   categoryId INTEGER NOT NULL,
   FOREIGN KEY (categoryId) REFERENCES required_categories (categoryId)
 );
@@ -46,8 +46,8 @@ DROP TABLE optional_choices;
 -- Create table for optional_choices
 CREATE TABLE optional_choices (
   choiceId INTEGER NOT NULL PRIMARY KEY,
-  name VARCHAR(50) NOT NULL,
-  price NUMERIC INTEGER NOT NULL,
+  name VARCHAR(150) NOT NULL,
+  price NUMERIC NOT NULL,
   itemId INTEGER NOT NULL,
   FOREIGN KEY (itemId) REFERENCES menu_items (itemId)
 );
