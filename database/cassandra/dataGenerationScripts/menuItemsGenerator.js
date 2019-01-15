@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const dataFuncs = require('../seed/dataGenerator');
+const dataFuncs = require('../../seed/dataGenerator');
 
 const params = {
   numMenuItems: { max: 10, min: 5 },
