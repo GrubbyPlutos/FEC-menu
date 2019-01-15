@@ -3,7 +3,7 @@ const fs = require('fs');
 // const csvWriter = require('csv-write-stream');
 // const writer = csvWriter();
 
-const dataFuncs = require('../seed/dataGenerator');
+const dataFuncs = require('../../seed/dataGenerator');
 
 const params = {
   numMenuItems: { max: 10, min: 5 },
