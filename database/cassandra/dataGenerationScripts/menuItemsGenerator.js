@@ -27,7 +27,7 @@ const menuItemsPrinter = () => {
       let data;
 
       if (itemId === 1) {
-        fil.write('itemId,restaurantId,category,name,price,description,pictureUrl,popular,spicy,required,optional\n')
+        fil.write('itemId~restaurantId~category~name~price~description~pictureUrl~popular~spicy~required~optional\n')
       } 
 
       if (itemId > 30000000) {
