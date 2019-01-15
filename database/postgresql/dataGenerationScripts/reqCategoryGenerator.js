@@ -27,12 +27,12 @@ const requiredCategoriesPrinter = () => {
 
     while (categoryId <= maxLimit && result) {
       if (categoryId === 1) {
-        fil.write('categoryId,categoryName,itemId\n')
+        fil.write('categoryId~categoryName~itemId\n')
       } 
       
       const data = dataFuncs.generateRequiredChoiceCategories(categoryId, (Math.floor(Math.random() * (100000000 - 1) + 1)));
       
-      let stringToWrite = `${data.categoryId},${data.categoryName},${data.itemId}\n`;
+      let stringToWrite = `${data.categoryId}~${data.categoryName}~${data.itemId}\n`;
       result = fil.write(stringToWrite);
       
       if (categoryId % 10000 === 0) {
