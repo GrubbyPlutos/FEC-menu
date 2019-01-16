@@ -2,7 +2,7 @@
 CREATE SCHEMA IF NOT EXISTS grubhub AUTHORIZATION phdickson;
 
 -- Delete menu_items table if exists
-DROP TABLE menu_items;
+-- DROP TABLE menu_items;
 
 -- Create table for menu_items
 CREATE TABLE menu_items (
@@ -18,7 +18,7 @@ CREATE TABLE menu_items (
 );
 
 -- Delete required_categories table if exists
-DROP TABLE required_categories;
+-- DROP TABLE required_categories;
 
 -- Create table for required_categories
 CREATE TABLE required_categories (
@@ -29,7 +29,7 @@ CREATE TABLE required_categories (
 );
 
 -- Delete required_choices table if exists
-DROP TABLE required_choices;
+-- DROP TABLE required_choices;
 
 -- Create table for required_choices
 CREATE TABLE required_choices (
@@ -41,7 +41,7 @@ CREATE TABLE required_choices (
 );
 
 -- Delete optional_choices table if exists
-DROP TABLE optional_choices;
+-- DROP TABLE optional_choices;
 
 -- Create table for optional_choices
 CREATE TABLE optional_choices (
