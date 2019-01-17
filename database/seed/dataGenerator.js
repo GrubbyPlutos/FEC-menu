@@ -21,10 +21,11 @@ const generateName = () => faker.random.words();
 const generateMenuItemCategoriesArray = numCategories => (
   randomArray(numCategories, () => generateName())
 );
-// const generateChoice = range => ({
-//   name: generateName(),
-//   price: randomFloat(range),
-// });
+const generateChoiceCassandra = range => ({
+  name: generateName(),
+  price: randomFloat(range),
+});
+
 const generateChoice = (choiceId, range, categoryId) => ({
   choiceId,
   name: generateName(),
@@ -40,15 +41,15 @@ const generateOptionalChoice = (choiceId, range, itemId) => ({
 });
 
 const generateChoicesArray = (numChoices, prices) => (
-  randomArray(numChoices, () => generateChoice(prices))
+  randomArray(numChoices, () => generateChoiceCassandra(prices))
 );
 
-// const generateRequiredChoiceCategories = (numCategories, numChoices, prices) => (
-//   randomArray(numCategories, () => ({
-//     name: generateName(),
-//     choices: generateChoicesArray(numChoices, prices),
-//   }))
-// );
+const generateRequiredChoiceCategoriesCassandra = (numCategories, numChoices, prices) => (
+  randomArray(numCategories, () => ({
+    name: generateName(),
+    choices: generateChoicesArray(numChoices, prices),
+  }))
+);
 
 const generateRequiredChoiceCategories = (categoryId, itemId) => ({
     categoryId,
@@ -86,6 +87,24 @@ const generateMenuItem = (itemId, restaurantId, category, params) => ({
   spicy: Math.random() < params.spicyFraction,
 });
 
+const generateMenuItemCassandra = (itemId, restaurantId, category, params) => ({
+  itemId,
+  restaurantId,
+  category,
+  name: generateName(),
+  price: randomFloat(params.priceRange),
+  description: faker.lorem.paragraph(),
+  pictureUrl: pictures[faker.random.number(pictures.length - 1)],
+  popular: Math.random() < params.popularFraction,
+  spicy: Math.random() < params.spicyFraction,
+  requiredChoiceCategories: generateRequiredChoiceCategoriesCassandra(
+    params.numRequiredChoiceCategories,
+    params.numRequiredChoices,
+    params.priceRange,
+  ),
+  optionalChoices: generateChoicesArray(params.numOptionalChoices, params.priceRange),
+});
+
 
 const generateData = (params) => {
   const data = [];
@@ -108,7 +127,8 @@ module.exports = {
   generateChoice,
   generateOptionalChoice,
   randomArray,
-  randomIndex
+  randomIndex,
+  generateMenuItemCassandra,
 };
 
 // module.exports = generateData;

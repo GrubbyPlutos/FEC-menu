@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const dataFuncs = require('../seed/dataGenerator');
+const dataFuncs = require('../../seed/dataGenerator');
 
 const params = {
   numMenuItems: { max: 10, min: 5 },
@@ -31,7 +31,7 @@ const requiredChoicesPrinter = () => {
       let data;
       
       if (choiceId === 1) {
-        fil.write('choiceId,name,price,categoryId\n')
+        fil.write('choiceId~name~price~categoryId\n')
       } 
 
       if (choiceId > 66000000) {
@@ -40,7 +40,7 @@ const requiredChoicesPrinter = () => {
         data = dataFuncs.generateChoice(choiceId, params.priceRange, categoryId);
       }
 
-      let stringToWrite = `${data.choiceId},${data.name},${data.price},${data.categoryId}\n`;
+      let stringToWrite = `${data.choiceId}~${data.name}~${data.price}~${data.categoryId}\n`;
       result = fil.write(stringToWrite);
       
       if (choiceId % 10000 === 0) {

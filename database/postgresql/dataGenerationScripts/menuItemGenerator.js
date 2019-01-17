@@ -3,7 +3,7 @@ const fs = require('fs');
 // const csvWriter = require('csv-write-stream');
 // const writer = csvWriter();
 
-const dataFuncs = require('../seed/dataGenerator');
+const dataFuncs = require('../../seed/dataGenerator');
 
 const params = {
   numMenuItems: { max: 10, min: 5 },
@@ -36,7 +36,7 @@ const menuItemsPrinter = () => {
       //   );
       // });
       if (itemId === 1) {
-        fil.write('itemId,restaurantId,category,name,price,description,pictureUrl,popular,spicy\n')
+        fil.write('itemId~restaurantId~category~name~price~description~pictureUrl~popular~spicy\n')
       } 
 
       if (itemId > 30000000) {
@@ -51,7 +51,7 @@ const menuItemsPrinter = () => {
 
       // for (let x = 0; x < data.length; x++) {
       //   let obj = data[x];
-      let stringToWrite = `${data.itemId},${data.restaurantId},${data.category},${data.name},${data.price},${data.description},${data.pictureUrl},${data.popular},${data.spicy}\n`;
+      let stringToWrite = `${data.itemId}~${data.restaurantId}~${data.category}~${data.name}~${data.price}~${data.description}~${data.pictureUrl}~${data.popular}~${data.spicy}\n`;
       result = fil.write(stringToWrite);
       // }
       
