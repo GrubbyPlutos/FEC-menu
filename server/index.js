@@ -1,7 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-const db = require('../database/postgresql');
+const db = require('../database/postgresql/index');
+// const db = require('../database/cassandra/index');
 
 const app = express();
 app.use(bodyParser.json());
