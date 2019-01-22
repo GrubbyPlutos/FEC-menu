@@ -36,7 +36,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    const url = `${window.location.pathname}/menu-items`;
+    const url = `${window.location.pathname}/menu_items`;
     axios.get(url.replace('//', '/'))
       .then((response) => {
         const items = response.data;
@@ -55,7 +55,7 @@ class App extends React.Component {
   }
 
   menuListItemClick(itemId) {
-    const url = `${window.location.pathname}/menu-items/${itemId}`;
+    const url = `${window.location.pathname}/menu_items/${itemId}`;
     axios.get(url.replace('//', '/'))
       .then((response) => {
         const item = response.data;
