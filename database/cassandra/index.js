@@ -13,7 +13,7 @@ client.connect((err) => {
   console.log('Connected to Cassandra');
 })
 
-const getFullMenu = (params) => {
+const getFullMenu = async (params) => {
   let queryString = `SELECT * FROM menu_items WHERE restaurantid = ?`
   try {
     const fullMenu = await client.execute(queryString, params, { prepare: true });
@@ -24,7 +24,7 @@ const getFullMenu = (params) => {
   }
 }
 
-const getMenuItem = (params) => {
+const getMenuItem = async (params) => {
   let queryString = `SELECT * FROM menu_items WHERE restaurantid = ? AND itemid = ?`;
   try {
     const menuItem = await client.execute(queryString, params, { prepare: true });

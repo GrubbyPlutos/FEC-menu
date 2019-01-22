@@ -4,7 +4,7 @@ CREATE KEYSPACE grubhub
 USE grubhub;
 
 CREATE TABLE menu_items (
-  itemId int PRIMARY KEY,
+  itemId int,
   restaurantId int,
   category text,
   name text,
@@ -15,7 +15,9 @@ CREATE TABLE menu_items (
   spicy boolean,
   required text,
   optional text
-);
+  PRIMARY KEY (itemId, restaurantId),
+)
+WITH CLUSTERING ORDER BY (restaurantId ASC);
 
 COPY menu_items(itemId,restaurantId,category,name,price,description,pictureUrl,popular,spicy,required,optional) 
     FROM '/Users/phdickson/Desktop/SDC/FEC-menu/database/cassandra/dataGenerationScripts/menuItemsCassandra.csv' 
