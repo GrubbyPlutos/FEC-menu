@@ -31,7 +31,7 @@ const requiredChoicesPrinter = () => {
       let data;
       
       if (choiceId === 1) {
-        fil.write('choiceId~name~price~categoryId\n')
+        fil.write('reqChoiceId~reqChoiceName~reqChoicePrice~categoryId\n')
       } 
 
       if (choiceId > 66000000) {

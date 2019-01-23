@@ -29,7 +29,7 @@ const optionalChoicesPrinter = () => {
       const data = dataFuncs.generateOptionalChoice(choiceId, params.priceRange, (Math.floor(Math.random() * (100000000 - 1) + 1)));
 
       if (choiceId === 1) {
-        fil.write('choiceId~name~price~itemId\n')
+        fil.write('optChoiceId~optChoiceName~optChoicePrice~itemId\n')
       } 
 
       let stringToWrite = `${data.choiceId}~${data.name}~${data.price}~${data.itemId}\n`;
