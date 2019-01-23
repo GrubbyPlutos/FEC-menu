@@ -13,11 +13,11 @@ client.connect()
   })
   .then(() => {
     console.log('querying req choices');
-    return client.query(`COPY required_choices(choiceId,name,price,categoryId) FROM '/Users/phdickson/Desktop/SDC/FEC-menu/database/postgresql/dataGenerationScripts/requiredChoices.csv' DELIMITER '~' CSV HEADER;`);
+    return client.query(`COPY required_choices(reqChoiceId,reqChoiceName,reqChoicePrice,categoryId) FROM '/Users/phdickson/Desktop/SDC/FEC-menu/database/postgresql/dataGenerationScripts/requiredChoices.csv' DELIMITER '~' CSV HEADER;`);
   })
   .then(() => {
     console.log('querying optional choices');
-    return client.query(`COPY optional_choices(choiceId,name,price,itemId) FROM '/Users/phdickson/Desktop/SDC/FEC-menu/database/postgresql/dataGenerationScripts/optionalChoices.csv' DELIMITER '~' CSV HEADER;`);
+    return client.query(`COPY optional_choices(optChoiceId,optChoiceName,optChoicePrice,itemId) FROM '/Users/phdickson/Desktop/SDC/FEC-menu/database/postgresql/dataGenerationScripts/optionalChoices.csv' DELIMITER '~' CSV HEADER;`);
   })
   .then(() => {
     console.log('Success');
