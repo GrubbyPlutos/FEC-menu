@@ -17,7 +17,22 @@ app.get('/restaurants/:id/menu_items', async (req, res) => {
   try {
     const fullMenu = await db.getFullMenu([restaurantId]);
     console.log('Retrieved from database:');
-    res.status(200).send(fullMenu);
+    let clientFullMenu = [];
+    for (let i = 0; i < fullMenu.length; i++) {
+      let clientMenuItem = {};
+      let item = fullMenu[i];
+      clientMenuItem['itemId'] = item.itemid;
+      clientMenuItem['restaurantId'] = item.restaurantid;
+      clientMenuItem['category'] = item.category;
+      clientMenuItem['name'] = item.name;
+      clientMenuItem['price'] = item.price;
+      clientMenuItem['description'] = item.description;
+      clientMenuItem['pictureUrl'] = item.pictureurl;
+      clientMenuItem['popular'] = item.popular;
+      clientMenuItem['spicy'] = item.spicy;
+      clientFullMenu.push(clientMenuItem);
+    }
+    res.status(200).send(clientFullMenu);
   } catch (err) {
     res.sendStatus(500);
   }
