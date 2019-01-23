@@ -33,9 +33,9 @@ CREATE TABLE required_categories (
 
 -- Create table for required_choices
 CREATE TABLE required_choices (
-  choiceId INTEGER NOT NULL PRIMARY KEY,
-  name VARCHAR(150) NOT NULL,
-  price NUMERIC NOT NULL,
+  reqChoiceId INTEGER NOT NULL PRIMARY KEY,
+  reqChoiceName VARCHAR(150) NOT NULL,
+  reqChoicePrice NUMERIC NOT NULL,
   categoryId INTEGER NOT NULL,
   FOREIGN KEY (categoryId) REFERENCES required_categories (categoryId)
 );
@@ -45,9 +45,9 @@ CREATE TABLE required_choices (
 
 -- Create table for optional_choices
 CREATE TABLE optional_choices (
-  choiceId INTEGER NOT NULL PRIMARY KEY,
-  name VARCHAR(150) NOT NULL,
-  price NUMERIC NOT NULL,
+  optChoiceId INTEGER NOT NULL PRIMARY KEY,
+  optChoiceName VARCHAR(150) NOT NULL,
+  optChoicePrice NUMERIC NOT NULL,
   itemId INTEGER NOT NULL,
   FOREIGN KEY (itemId) REFERENCES menu_items (itemId)
 );
