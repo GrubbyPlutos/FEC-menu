@@ -25,7 +25,7 @@ app.get('/restaurants/:id/menu_items', async (req, res) => {
       clientMenuItem['restaurantId'] = item.restaurantid;
       clientMenuItem['category'] = item.category;
       clientMenuItem['name'] = item.name;
-      clientMenuItem['price'] = item.price;
+      clientMenuItem['price'] = Number(item.price);
       clientMenuItem['description'] = item.description;
       clientMenuItem['pictureUrl'] = item.pictureurl;
       clientMenuItem['popular'] = item.popular;
@@ -42,7 +42,68 @@ app.get('/restaurants/:id/menu_items', async (req, res) => {
 app.get('/restaurants/:id/menu_items/:itemId', async (req, res) => {
   try {
     const menuItem = await db.getMenuItem([req.params.id, req.params.itemId]);
-    res.status(200).send(menuItem);
+    const menuItemInfo = menuItem[0];
+    let clientMenuItem = {
+      itemId: menuItemInfo.itemid,
+      restaurantId: menuItemInfo.restaurantid,
+      category: menuItemInfo.category,
+      name: menuItemInfo.name,
+      price: Number(menuItemInfo.price),
+      description: menuItemInfo.description,
+      pictureUrl: menuItemInfo.pictureurl,
+      popular: menuItemInfo.popular,
+      spicy: menuItemInfo.spicy,
+      requiredChoiceCategories: [],
+      optionalChoices: [],
+    };
+
+    let optionalChoiceList = {};
+    let reqCategoryList = {};
+    let reqChoiceList = {};
+
+    for (let i = 0; i < menuItem.length; i++) {
+      let item = menuItem[i];
+      if (item.optchoicename) {
+        let optionalChoiceObj = {
+          name: item.optchoicename,
+          price: Number(item.optchoiceprice),
+        };
+        
+        if (!optionalChoiceList[item.optchoicename]) {
+          clientMenuItem.optionalChoices.push(optionalChoiceObj);
+        }
+        optionalChoiceList[item.optchoicename] = 1;
+      }
+      
+      if (item.categoryname) {
+        let requiredCategoryObj = {
+          name: item.categoryname,
+          choices: [],
+        };
+
+        for (let j = 0; j < menuItem.length; j++) {
+          let innerItem = menuItem[j];
+          let reqCategory = innerItem.categoryname;
+          if (requiredCategoryObj.name === reqCategory) {
+            let requiredChoiceObj = {
+              name: innerItem.reqchoicename,
+              price: Number(innerItem.reqchoiceprice),
+            };
+            if (!reqChoiceList[item.reqchoicename]) {
+              requiredCategoryObj.choices.push(requiredChoiceObj);
+            }
+            reqChoiceList[item.reqchoicename] = 1;
+          }
+        }
+
+        if (!reqCategoryList[item.categoryname]) {
+          clientMenuItem.requiredChoiceCategories.push(requiredCategoryObj);
+        }
+        reqCategoryList[item.categoryname] = 1;
+      }
+    }
+
+    res.status(200).send(clientMenuItem);
   } catch (err) {
     res.sendStatus(500);
   }
