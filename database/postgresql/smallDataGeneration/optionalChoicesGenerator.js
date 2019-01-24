@@ -14,19 +14,19 @@ const params = {
 };
 
 ////////////////////////////////////////////////////////
-// GENERATES 100 MILLION
+// GENERATES 20 MILLION
 //   optional choices randomly dispersed amongst menu items
 ////////////////////////////////////////////////////////
 const optionalChoicesPrinter = () => {
-  const fil = fs.createWriteStream('optionalChoices.csv');
+  const fil = fs.createWriteStream('smallOptionalChoices.csv');
   let choiceId = 1;
-  const maxLimit = 100000000;
+  const maxLimit = 20000000;
 
   const writer = () => {
     let result = true;
 
     while (choiceId <= maxLimit && result) {
-      const data = dataFuncs.generateOptionalChoice(choiceId, params.priceRange, (Math.floor(Math.random() * (100000000 - 1) + 1)));
+      const data = dataFuncs.generateOptionalChoice(choiceId, params.priceRange, (Math.floor(Math.random() * (20000000 - 1) + 1)));
 
       if (choiceId === 1) {
         fil.write('optChoiceId~optChoiceName~optChoicePrice~itemId\n')

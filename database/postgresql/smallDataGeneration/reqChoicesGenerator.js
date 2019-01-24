@@ -14,15 +14,15 @@ const params = {
 };
 
 ////////////////////////////////////////////////////////
-// GENERATES 132 MILLION
+// GENERATES 26.4 MILLION
 //   After 2 choices created for each required category
 //     reqCategoryIds are randomized from 1 to 33 million
 ////////////////////////////////////////////////////////
 const requiredChoicesPrinter = () => {
-  const fil = fs.createWriteStream('requiredChoices.csv');
+  const fil = fs.createWriteStream('smallRequiredChoices.csv');
   let choiceId = 1;
   let categoryId = 1;
-  const maxLimit = 132000000;
+  const maxLimit = 26400000;
 
   const writer = () => {
     let result = true;
@@ -35,7 +35,7 @@ const requiredChoicesPrinter = () => {
       } 
 
       if (choiceId > 66000000) {
-        data = dataFuncs.generateChoice(choiceId, params.priceRange, (Math.floor(Math.random() * (33000000 - 1) + 1)));
+        data = dataFuncs.generateChoice(choiceId, params.priceRange, (Math.floor(Math.random() * (6600000 - 1) + 1)));
       } else {
         data = dataFuncs.generateChoice(choiceId, params.priceRange, categoryId);
       }
@@ -50,7 +50,7 @@ const requiredChoicesPrinter = () => {
       choiceId++;
       categoryId++;
       
-      if (categoryId > 33000000) {
+      if (categoryId > 6600000) {
         categoryId = 1;
       }
     }
