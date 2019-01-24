@@ -1,5 +1,5 @@
 -- If grubhub schema does not exist, create it
-CREATE SCHEMA IF NOT EXISTS grubhub AUTHORIZATION phdickson;
+CREATE SCHEMA IF NOT EXISTS grubhub AUTHORIZATION /*FILL_ME_IN*/;
 
 -- Delete menu_items table if exists
 -- DROP TABLE menu_items;
