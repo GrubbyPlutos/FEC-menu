@@ -43,7 +43,7 @@ const PopularItem = ({ item, handleClick }) => (
   <Container onClick={() => handleClick(item.itemId)} pictureUrl={item.pictureUrl}>
     <NameAndPriceBox>
       <Heading>{item.name}</Heading>
-      <Heading>{`$${Number(item.price).toFixed(2)}+`}</Heading>
+      <Heading>{`$${item.price.toFixed(2)}+`}</Heading>
     </NameAndPriceBox>
   </Container>
 );

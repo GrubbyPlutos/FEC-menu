@@ -91,7 +91,7 @@ const MenuListItem = ({ item, menuListItemClick }) => (
       <div>{item.spicy ? <Spicy src={spicyIcon} alt="spicy" /> : null}</div>
     </Main>
     <Image src={item.pictureUrl} alt="menu item" />
-    <Price>{`$${Number(item.price).toFixed(2)}+`}</Price>
+    <Price>{`$${item.price.toFixed(2)}+`}</Price>
   </Container>
 );
 
