@@ -1,8 +1,11 @@
 const { Client } = require('pg');
 
 const client = new Client({
-  database: 'sdc',
+  host: '13.59.237.10',
   port: 5432,
+  database: 'smallsdc',
+  user: '/*FILL_ME_IN*/',
+  password: '/*FILL_ME_IN*/',
 });
 
 client.connect((err) => {
@@ -44,4 +47,3 @@ module.exports = {
   getFullMenu,
   getMenuItem,
 }
-
